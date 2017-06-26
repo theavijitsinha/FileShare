@@ -7,13 +7,6 @@ const Constants = require('./service/constants.js')
 
 eventHandler.listen(Constants.EVENT_FILE_SERVER_STARTED, () => {
   peerDiscovery.startDiscoverer()
-
-  window.setTimeout(function () {
-    console.log(fileWatcher.getFileTree().root.children.length)
-    fileServer.stopFileServer()
-    fileWatcher.stopFileWatcher()
-    peerDiscovery.stopDiscoverer()
-  }, 6000)
 })
 
 eventHandler.listen(Constants.EVENT_PEER_UP, (serverNode) => {
@@ -24,6 +17,12 @@ eventHandler.listen(Constants.EVENT_PEER_UP, (serverNode) => {
     peerConnection.disconnect()
   }, 4000)
 })
+
+window.onbeforeunload = function (event) {
+  fileServer.stopFileServer()
+  fileWatcher.stopFileWatcher()
+  peerDiscovery.stopDiscoverer()
+}
 
 fileWatcher.startFileWatcher()
 
