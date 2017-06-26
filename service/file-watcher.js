@@ -2,6 +2,9 @@ module.exports = {}
 
 const Tree = require('../data_type/tree.js')
 
+const eventHandler = require('./event-handler.js')
+const Constants = require('./constants.js')
+
 const chokidar = require('chokidar')
 const path = require('path')
 
@@ -28,12 +31,15 @@ module.exports.startFileWatcher = function () {
   .on('unlink', function (path) {
     fileTree.deleteNode(path)
   })
+
+  eventHandler.emit(Constants.EVENT_FILE_WATCHER_STARTED)
 }
 
 module.exports.stopFileWatcher = function () {
   if (watcher !== null) {
     watcher.close()
     watcher = null
+    eventHandler.emit(Constants.EVENT_FILE_WATCHER_STOPPED)
   }
 }
 
