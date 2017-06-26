@@ -1,0 +1,24 @@
+{
+  "name": "fileshare",
+  "version": "1.0.0",
+  "description": "Local FileShare Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "file",
+    "share",
+    "local"
+  ],
+  "author": "Avijit Sinha",
+  "license": "CC0-1.0",
+  "dependencies": {
+    "chokidar": "^1.7.0",
+    "nanodiscover": "^1.0.2"
+  },
+  "devDependencies": {
+    "electron": "^1.6.10"
+  }
+}
