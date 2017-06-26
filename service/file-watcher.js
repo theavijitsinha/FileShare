@@ -43,9 +43,7 @@ module.exports.stopFileWatcher = function () {
   }
 }
 
-module.exports.getFileTree = function () {
-  return fileTree
-}
+module.exports.fileTree = fileTree
 
 function updateTree (fileTree) {
   document.getElementById('tree').innerHTML = JSON.stringify(fileTree.getArrayObject(), null, 2)
