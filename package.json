@@ -16,7 +16,8 @@
   "license": "CC0-1.0",
   "dependencies": {
     "chokidar": "^1.7.0",
-    "nanodiscover": "^1.0.2"
+    "nanodiscover": "^1.0.2",
+    "vue": "^2.3.4"
   },
   "devDependencies": {
     "electron": "^1.6.10"
