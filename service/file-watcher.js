@@ -9,10 +9,10 @@ const chokidar = require('chokidar')
 const path = require('path')
 
 let watcher = null
-let fileTree = null
+let fileTree = new Tree()
 
 module.exports.startFileWatcher = function () {
-  fileTree = new Tree()
+  fileTree.clearTree()
   let sharedPaths = []
 
   sharedPaths.push(path.resolve('./shared1'))
@@ -37,6 +37,7 @@ module.exports.startFileWatcher = function () {
 
 module.exports.stopFileWatcher = function () {
   if (watcher !== null) {
+    fileTree.clearTree()
     watcher.close()
     watcher = null
     eventHandler.emit(Constants.EVENT_FILE_WATCHER_STOPPED)

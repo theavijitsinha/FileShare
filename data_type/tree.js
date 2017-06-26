@@ -66,6 +66,10 @@ class Tree {
     curNode.children = []
   }
 
+  clearTree () {
+    this.deleteNodeRecursive(this.root)
+  }
+
   getArrayObject (curNode = this.root) {
     let arrayObj = []
     arrayObj.push(curNode.name)
