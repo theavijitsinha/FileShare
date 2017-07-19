@@ -4,7 +4,8 @@
   "description": "Local FileShare Application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "gulp": "gulp"
   },
   "repository": "https://github.com/theavijitsinha/FileShare",
   "keywords": [
