@@ -17,7 +17,6 @@
   "dependencies": {
     "chokidar": "^1.7.0",
     "nanodiscover": "^1.0.2",
-    "vue": "^2.3.4"
   },
   "devDependencies": {
     "electron": "^1.7.4",
