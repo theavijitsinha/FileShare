@@ -21,15 +21,19 @@ module.exports.startFileWatcher = function () {
   watcher = chokidar.watch(sharedPaths, {ignored: /(^|[/\\])\../})
   .on('addDir', function (path) {
     fileTree.addNode(path, Tree.NodeType.DIR_NODE)
+    eventHandler.emit(Constants.EVENT_USER_FILES_CHANGED)
   })
   .on('add', function (path) {
     fileTree.addNode(path, Tree.NodeType.FILE_NODE)
+    eventHandler.emit(Constants.EVENT_USER_FILES_CHANGED)
   })
   .on('unlinkDir', function (path) {
     fileTree.deleteNode(path)
+    eventHandler.emit(Constants.EVENT_USER_FILES_CHANGED)
   })
   .on('unlink', function (path) {
     fileTree.deleteNode(path)
+    eventHandler.emit(Constants.EVENT_USER_FILES_CHANGED)
   })
 
   eventHandler.emit(Constants.EVENT_FILE_WATCHER_STARTED)

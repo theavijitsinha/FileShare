@@ -12,6 +12,8 @@ module.exports.EVENT_PEER_DOWN = 'peer_down'
 module.exports.EVENT_FILE_WATCHER_STARTED = 'file_watcher_started'
 module.exports.EVENT_FILE_WATCHER_STOPPED = 'file_watcher_stopped'
 
+module.exports.EVENT_USER_FILES_CHANGED = 'user_files_changed'
+
 // Constants
 module.exports.FILE_SERVER_IP = '0.0.0.0'
 module.exports.FILE_SERVER_PORT = 8000
