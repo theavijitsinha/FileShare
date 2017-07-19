@@ -4,6 +4,8 @@ const eventHandler = require('./service/event-handler.js')
 const peerDiscovery = require('./service/peer-discovery.js')
 const Constants = require('./service/constants.js')
 
+require('./user_interface/react_compiled/main.react.js')
+
 eventHandler.listen(Constants.EVENT_FILE_SERVER_STARTED, () => {
   peerDiscovery.startDiscoverer()
 })
