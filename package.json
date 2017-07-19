@@ -16,6 +16,7 @@
   "license": "CC0-1.0",
   "dependencies": {
     "chokidar": "^1.7.0",
+    "fs-extra": "^3.0.1",
     "nanodiscover": "^1.0.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
