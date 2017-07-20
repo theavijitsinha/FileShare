@@ -28,6 +28,10 @@ function compileReact (initial = false) {
     fse.remove(dstPath, function () {
       gulp.src(srcPath + reactPath)
         .pipe(babel())
+        .on('error', (err) => {
+          console.log(err.stack)
+          return false
+        })
         .pipe(gulp.dest(dstPath))
     })
   } else {
