@@ -6,6 +6,7 @@ const eventHandler = require('./event-handler.js')
 const Constants = require('./constants.js')
 
 const chokidar = require('chokidar')
+const fse = require('fs-extra')
 const path = require('path')
 
 let watcher = null
@@ -13,10 +14,7 @@ let fileTree = new Tree()
 
 module.exports.startFileWatcher = function () {
   fileTree.clearTree()
-  let sharedPaths = []
-
-  sharedPaths.push(path.resolve('./shared1'))
-  sharedPaths.push(path.resolve('./shared2'))
+  let sharedPaths = fse.readJsonSync(path.join(__dirname, '../settings/user.json')).sharedPaths
 
   watcher = chokidar.watch(sharedPaths, {ignored: /(^|[/\\])\../})
   .on('addDir', function (path) {
