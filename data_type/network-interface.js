@@ -1,3 +1,6 @@
+/**
+ * Network interface on the device
+ */
 class NetworkInterface {
   constructor (name, address, netmask) {
     this.name = name
@@ -5,6 +8,9 @@ class NetworkInterface {
     this.netmask = netmask
   }
 
+  /**
+   * Get multicast address for the interface's network
+   */
   getMulticastAddress () {
     let addressSplit = this.address.split('.')
     let netmaskSplit = this.netmask.split('.')

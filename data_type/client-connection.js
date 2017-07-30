@@ -1,3 +1,6 @@
+/**
+ * Handle clients connected to the file server
+ */
 class ClientConnection {
   constructor (socket) {
     this.socket = socket
@@ -10,6 +13,10 @@ class ClientConnection {
     this.socket.on('data', this.dataHandler.bind(this))
   }
 
+  /**
+   * Split the data received into messages and call messageHandler for each
+   * message
+   */
   dataHandler (data) {
     this.buffer = this.buffer + data
     let pattern = /^([^\r\n]+)[\r\n]+([\s\S]*)$/

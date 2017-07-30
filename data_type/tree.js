@@ -1,3 +1,6 @@
+/**
+ * Node of the tree, representing a single file/directory (except root node)
+ */
 class Node {
   constructor (path, parent, nodeType) {
     this.path = path
@@ -13,6 +16,9 @@ class Node {
   }
 }
 
+/**
+ * Tree structure of user's shared files
+ */
 class Tree {
   constructor () {
     this.root = new Node('', null, Tree.NodeType.ROOT_NODE)
@@ -66,10 +72,16 @@ class Tree {
     curNode.children = []
   }
 
+  /**
+   * Delete all nodes (except root node) from the tree
+   */
   clearTree () {
     this.deleteNodeRecursive(this.root)
   }
 
+  /**
+   * Get array representation of file tree
+   */
   getArrayObject (curNode = this.root) {
     let arrayObj = []
     arrayObj.push(curNode.name)
