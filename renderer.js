@@ -21,7 +21,7 @@ fse.pathExists(file)
     }
   })
 
-eventHandler.listen(Constants.EVENT_FILE_SERVER_STARTED, () => {
+eventHandler.listen(Constants.Event.FILE_SERVER_STARTED, () => {
   peerDiscovery.startDiscoverer()
 })
 

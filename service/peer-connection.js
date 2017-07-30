@@ -18,7 +18,7 @@ class PeerConnection {
     })
     this.messageEventHandler = new EventEmitter()
     this.client.on('data', dataHandler)
-    this.messageEventHandler.on(Constants.EVENT_FILE_CLIENT_MESSAGE, messageHandler)
+    this.messageEventHandler.on(Constants.Event.FILE_CLIENT_MESSAGE, messageHandler)
 
     function dataHandler (data) {
       self.buffer = self.buffer + data
@@ -27,7 +27,7 @@ class PeerConnection {
       if (bufferMatch !== null) {
         let message = bufferMatch[1]
         self.buffer = bufferMatch[2]
-        self.messageEventHandler.emit(Constants.EVENT_FILE_CLIENT_MESSAGE, message)
+        self.messageEventHandler.emit(Constants.Event.FILE_CLIENT_MESSAGE, message)
       }
     }
 

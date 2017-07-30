@@ -15,11 +15,11 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    eventHandler.listen(Constants.EVENT_USER_FILES_CHANGED, this.setFileTree)
+    eventHandler.listen(Constants.Event.USER_FILES_CHANGED, this.setFileTree)
   }
 
   componentWillUnmount () {
-    eventHandler.unlisten(Constants.EVENT_USER_FILES_CHANGED, this.setFileTree)
+    eventHandler.unlisten(Constants.Event.USER_FILES_CHANGED, this.setFileTree)
   }
 
   render () {

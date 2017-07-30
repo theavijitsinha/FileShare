@@ -1,20 +1,20 @@
 module.exports = {}
 
-// Events
-module.exports.EVENT_FILE_SERVER_STARTED = 'server_started'
-module.exports.EVENT_FILE_SERVER_MESSAGE = 'message'
+module.exports.Event = {
+  FILE_SERVER_STARTED: 'server_started',
+  FILE_SERVER_MESSAGE: 'message',
 
-module.exports.EVENT_FILE_CLIENT_MESSAGE = 'message'
+  FILE_CLIENT_MESSAGE: 'message',
 
-module.exports.EVENT_PEER_UP = 'peer_up'
-module.exports.EVENT_PEER_DOWN = 'peer_down'
+  PEER_UP: 'peer_up',
+  PEER_DOWN: 'peer_down',
 
-module.exports.EVENT_FILE_WATCHER_STARTED = 'file_watcher_started'
-module.exports.EVENT_FILE_WATCHER_STOPPED = 'file_watcher_stopped'
+  FILE_WATCHER_STARTED: 'file_watcher_started',
+  FILE_WATCHER_STOPPED: 'file_watcher_stopped',
 
-module.exports.EVENT_USER_FILES_CHANGED = 'user_files_changed'
+  USER_FILES_CHANGED: 'user_files_changed'
+}
 
-// Constants
 module.exports.FILE_SERVER_IP = '0.0.0.0'
 module.exports.FILE_SERVER_PORT = 8000
 

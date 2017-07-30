@@ -27,7 +27,7 @@ module.exports.startFileServer = function () {
     const address = server.address()
     console.log(`File Server Listening ${address.address}:${address.port}`)
 
-    eventHandler.emit(Constants.EVENT_FILE_SERVER_STARTED)
+    eventHandler.emit(Constants.Event.FILE_SERVER_STARTED)
   })
   server.on('close', () => {
     console.log(`File Server Closed`)

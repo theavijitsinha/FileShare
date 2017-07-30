@@ -62,7 +62,7 @@ function messageHandler (msg, rinfo) {
   if (message.name === discoverServiceName && message.version === discoverServiceVersion) {
     if (!(rinfo.address in serverNodes)) {
       serverNodes[rinfo.address] = new ServerNode(rinfo.address, rinfo.address)
-      eventHandler.emit(Constants.EVENT_PEER_UP, serverNodes[rinfo.address])
+      eventHandler.emit(Constants.Event.PEER_UP, serverNodes[rinfo.address])
     }
     if (rinfo.address in timeouts) {
       window.clearTimeout(timeouts[rinfo.address])
@@ -71,7 +71,7 @@ function messageHandler (msg, rinfo) {
       delete serverNodes[rinfo.address]
       delete timeouts[rinfo.address]
     }, downInterval)
-    eventHandler.emit(Constants.EVENT_PEER_DOWN)
+    eventHandler.emit(Constants.Event.PEER_DOWN)
   }
 }
 
