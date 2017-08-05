@@ -2,13 +2,12 @@
  * Node of the tree, representing a single file/directory (except root node)
  */
 class Node {
-  constructor (path, parent, nodeType) {
+  constructor (path, nodeType) {
     this.path = path
     this.children = []
-    this.parent = parent
     this.nodeType = nodeType
 
-    if (parent === null) {
+    if (nodeType === Tree.NodeType.ROOT_NODE) {
       this.name = 'root'
     } else {
       this.name = path.match(/[\\/]?([^\\/]+)[\\/]?$/)[1]
@@ -21,7 +20,7 @@ class Node {
  */
 class Tree {
   constructor () {
-    this.root = new Node('', null, Tree.NodeType.ROOT_NODE)
+    this.root = new Node('', Tree.NodeType.ROOT_NODE)
   }
 
   addNode (path, nodeType) {
@@ -39,14 +38,15 @@ class Tree {
       }
     } while (matchChild !== null)
     if (curNode.path !== path) {
-      curNode.children.push(new Node(path, curNode, nodeType))
+      curNode.children.push(new Node(path, nodeType))
     }
   }
 
   deleteNode (path) {
-    let curNode
+    let curNode, prevNode
     let matchChild = this.root
     do {
+      prevNode = curNode
       curNode = matchChild
       matchChild = null
       for (let i = 0; i < curNode.children.length; i++) {
@@ -58,8 +58,8 @@ class Tree {
       }
     } while (matchChild !== null)
     if (curNode.path === path) {
-      let index = curNode.parent.children.indexOf(curNode)
-      curNode.parent.children.splice(index, 1)
+      let index = prevNode.children.indexOf(curNode)
+      prevNode.children.splice(index, 1)
       this.deleteNodeRecursive(curNode)
     }
   }
@@ -68,7 +68,6 @@ class Tree {
     for (let i = 0; i < curNode.children.length; i++) {
       this.deleteNodeRecursive(curNode.children[i])
     }
-    curNode.parent = null
     curNode.children = []
   }
 
