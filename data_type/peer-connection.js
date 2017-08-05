@@ -1,6 +1,7 @@
 const Constants = require('../service/constants.js')
 
 const Connection = require('./connection.js')
+const Message = require('./message.js')
 
 const net = require('net')
 
@@ -23,6 +24,11 @@ class PeerConnection extends Connection {
 
   disconnect () {
     this.socket.destroy()
+  }
+
+  fetchFileTree () {
+    let message = new Message('get_file_tree')
+    this.sendMessage(message)
   }
 }
 
