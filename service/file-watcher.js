@@ -46,4 +46,12 @@ module.exports.stopFileWatcher = function () {
   }
 }
 
+module.exports.getPublicTree = function (returnJSON = false) {
+  if (returnJSON) {
+    return JSON.stringify(fileTree)
+  } else {
+    return fileTree
+  }
+}
+
 module.exports.fileTree = fileTree
