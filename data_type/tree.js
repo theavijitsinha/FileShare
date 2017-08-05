@@ -77,24 +77,6 @@ class Tree {
   clearTree () {
     this.deleteNodeRecursive(this.root)
   }
-
-  /**
-   * Get array representation of file tree
-   */
-  getArrayObject (curNode = this.root) {
-    let arrayObj = []
-    arrayObj.push(curNode.name)
-    if (curNode.nodeType === Tree.NodeType.ROOT_NODE || curNode.nodeType === Tree.NodeType.DIR_NODE) {
-      let childrenArray = []
-      for (let i = 0; i < curNode.children.length; i++) {
-        let child = curNode.children[i]
-        childrenArray = childrenArray.concat(this.getArrayObject(child))
-      }
-      arrayObj.push(childrenArray)
-    }
-
-    return arrayObj
-  }
 }
 
 Tree.NodeType = {
