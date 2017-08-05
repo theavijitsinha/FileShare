@@ -70,8 +70,8 @@ function messageHandler (msg, rinfo) {
     timeouts[rinfo.address] = setTimeout(function () {
       delete serverNodes[rinfo.address]
       delete timeouts[rinfo.address]
+      eventHandler.emit(Constants.Event.PEER_DOWN, rinfo.address)
     }, downInterval)
-    eventHandler.emit(Constants.Event.PEER_DOWN)
   }
 }
 
