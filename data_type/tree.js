@@ -77,6 +77,13 @@ class Tree {
   clearTree () {
     this.deleteNodeRecursive(this.root)
   }
+
+  excludePaths (returnJSON = false) {
+    let treeJSON = JSON.stringify(this, (key, value) => {
+      return key === 'path' ? undefined : value
+    })
+    return returnJSON ? treeJSON : JSON.parse(treeJSON)
+  }
 }
 
 Tree.NodeType = {
