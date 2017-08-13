@@ -17,22 +17,22 @@ module.exports.startFileWatcher = function () {
   let sharedPaths = fse.readJsonSync(path.join(__dirname, '../settings/user.json')).sharedPaths
 
   watcher = chokidar.watch(sharedPaths, {ignored: /(^|[/\\])\../})
-  .on('addDir', function (path) {
-    fileTree.addNode(path, Tree.NodeType.DIR_NODE)
-    eventHandler.emit(Constants.Event.USER_FILES_CHANGED)
-  })
-  .on('add', function (path) {
-    fileTree.addNode(path, Tree.NodeType.FILE_NODE)
-    eventHandler.emit(Constants.Event.USER_FILES_CHANGED)
-  })
-  .on('unlinkDir', function (path) {
-    fileTree.deleteNode(path)
-    eventHandler.emit(Constants.Event.USER_FILES_CHANGED)
-  })
-  .on('unlink', function (path) {
-    fileTree.deleteNode(path)
-    eventHandler.emit(Constants.Event.USER_FILES_CHANGED)
-  })
+    .on('addDir', function (path) {
+      fileTree.addNode(path, Tree.NodeType.DIR_NODE)
+      eventHandler.emit(Constants.Event.USER_FILES_CHANGED)
+    })
+    .on('add', function (path) {
+      fileTree.addNode(path, Tree.NodeType.FILE_NODE)
+      eventHandler.emit(Constants.Event.USER_FILES_CHANGED)
+    })
+    .on('unlinkDir', function (path) {
+      fileTree.deleteNode(path)
+      eventHandler.emit(Constants.Event.USER_FILES_CHANGED)
+    })
+    .on('unlink', function (path) {
+      fileTree.deleteNode(path)
+      eventHandler.emit(Constants.Event.USER_FILES_CHANGED)
+    })
 
   eventHandler.emit(Constants.Event.FILE_WATCHER_STARTED)
 }
