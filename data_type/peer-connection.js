@@ -10,16 +10,24 @@ let socketPort = Constants.FILE_SERVER_PORT
 class PeerConnection extends Connection {
   constructor (serverNode) {
     super(new net.Socket())
-    this.socket.connect(socketPort, serverNode.ip, function () {
-      console.log(`Client Connected To ${serverNode.name} (${serverNode.ip})`)
-    })
+    this.fileTree = null
+    this.serverNode = serverNode
+    this.socket.connect(socketPort, serverNode.ip, this.connectionHandler.bind(this))
     this.socket.on('close', function () {
       console.log(`Client Disconnected From ${serverNode.name} (${serverNode.ip})`)
     })
   }
 
+  connectionHandler () {
+    console.log(`Client Connected To ${this.serverNode.name} (${this.serverNode.ip})`)
+    this.fetchFileTree()
+  }
+
   messageHandler (message) {
-    console.log(`Client Received Message : ${message}`)
+    console.log(`Client Received Message : ${message.data}`)
+    if (message.head === 'file_tree') {
+      this.fileTree = message.data
+    }
   }
 
   disconnect () {
