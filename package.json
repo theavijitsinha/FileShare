@@ -19,6 +19,7 @@
     "chokidar": "^1.7.0",
     "fs-extra": "^4.0.1",
     "nanodiscover": "^1.0.2",
+    "node-machine-id": "^1.1.9",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },
