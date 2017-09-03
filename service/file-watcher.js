@@ -14,7 +14,14 @@ let fileTree = new Tree()
 
 module.exports.startFileWatcher = function () {
   fileTree.clearTree()
-  let sharedPaths = fse.readJsonSync(path.join(__dirname, '../settings/user.json')).sharedPaths
+  let sharedPathsArray = fse.readJsonSync(path.join(__dirname, '../settings/user.json')).sharedPaths
+  let sharedPaths = []
+  for (let sharedPathObj of sharedPathsArray) {
+    if (fse.pathExistsSync(sharedPathObj.path)) {
+      sharedPaths.push(sharedPathObj.path)
+      fileTree.addNode(sharedPathObj.path, Tree.NodeType.BASE_DIR_NODE, sharedPathObj.id)
+    }
+  }
 
   watcher = chokidar.watch(sharedPaths, {ignored: /(^|[/\\])\../})
     .on('addDir', function (path) {

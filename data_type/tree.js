@@ -15,6 +15,13 @@ class Node {
   }
 }
 
+class BaseNode extends Node {
+  constructor (path, nodeType, id) {
+    super(path, nodeType)
+    this.id = id
+  }
+}
+
 /**
  * Tree structure of user's shared files
  */
@@ -23,7 +30,7 @@ class Tree {
     this.root = new Node('', Tree.NodeType.ROOT_NODE)
   }
 
-  addNode (path, nodeType) {
+  addNode (path, nodeType, id) {
     let curNode
     let matchChild = this.root
     do {
@@ -38,7 +45,11 @@ class Tree {
       }
     } while (matchChild !== null)
     if (curNode.path !== path) {
-      curNode.children.push(new Node(path, nodeType))
+      if (nodeType === Tree.NodeType.BASE_DIR_NODE) {
+        curNode.children.push(new BaseNode(path, nodeType, id))
+      } else {
+        curNode.children.push(new Node(path, nodeType))
+      }
     }
   }
 
@@ -89,6 +100,7 @@ class Tree {
 Tree.NodeType = {
   FILE_NODE: 'file_node',
   DIR_NODE: 'directory_node',
+  BASE_DIR_NODE: 'base_directory_node',
   ROOT_NODE: 'root_node'
 }
 
