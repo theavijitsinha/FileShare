@@ -90,7 +90,7 @@ class Tree {
       if (key === 'nodePath') {
         for (let child of this.root.children) {
           let relativePath = path.relative(child.nodePath, value)
-          if (!relativePath.startsWith('..')){
+          if (!relativePath.startsWith('..')) {
             return relativePath
           }
         }
