@@ -54,7 +54,7 @@ module.exports.stopFileWatcher = function () {
 }
 
 module.exports.getPublicTree = function (returnJSON = false) {
-  return fileTree.excludePaths(returnJSON)
+  return fileTree.relativePaths(returnJSON)
 }
 
 module.exports.fileTree = fileTree

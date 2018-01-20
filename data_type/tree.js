@@ -1,24 +1,20 @@
+const path = require('path')
+
 /**
  * Node of the tree, representing a single file/directory (except root node)
  */
 class Node {
-  constructor (path, nodeType) {
-    this.path = path
+  constructor (nodePath, nodeType, id) {
+    this.nodePath = nodePath
     this.children = []
     this.nodeType = nodeType
+    this.id = id
 
     if (nodeType === Tree.NodeType.ROOT_NODE) {
       this.name = 'root'
     } else {
-      this.name = path.match(/[\\/]?([^\\/]+)[\\/]?$/)[1]
+      this.name = path.basename(nodePath)
     }
-  }
-}
-
-class BaseNode extends Node {
-  constructor (path, nodeType, id) {
-    super(path, nodeType)
-    this.id = id
   }
 }
 
@@ -27,10 +23,10 @@ class BaseNode extends Node {
  */
 class Tree {
   constructor () {
-    this.root = new Node('', Tree.NodeType.ROOT_NODE)
+    this.root = new Node('', Tree.NodeType.ROOT_NODE, 0)
   }
 
-  addNode (path, nodeType, id) {
+  addNode (nodePath, nodeType, id) {
     let curNode
     let matchChild = this.root
     do {
@@ -38,22 +34,22 @@ class Tree {
       matchChild = null
       for (let i = 0; i < curNode.children.length; i++) {
         let child = curNode.children[i]
-        if (path.startsWith(child.path)) {
+        if (!path.relative(child.nodePath, nodePath).startsWith('..')) {
           matchChild = child
           break
         }
       }
     } while (matchChild !== null)
-    if (curNode.path !== path) {
+    if (curNode.nodePath !== nodePath) {
       if (nodeType === Tree.NodeType.BASE_DIR_NODE) {
-        curNode.children.push(new BaseNode(path, nodeType, id))
+        curNode.children.push(new Node(nodePath, nodeType, id))
       } else {
-        curNode.children.push(new Node(path, nodeType))
+        curNode.children.push(new Node(nodePath, nodeType, curNode.id))
       }
     }
   }
 
-  deleteNode (path) {
+  deleteNode (nodePath) {
     let curNode, prevNode
     let matchChild = this.root
     do {
@@ -62,13 +58,13 @@ class Tree {
       matchChild = null
       for (let i = 0; i < curNode.children.length; i++) {
         let child = curNode.children[i]
-        if (path.startsWith(child.path)) {
+        if (!path.relative(child.nodePath, nodePath).startsWith('..')) {
           matchChild = child
           break
         }
       }
     } while (matchChild !== null)
-    if (curNode.path === path) {
+    if (curNode.nodePath === nodePath) {
       let index = prevNode.children.indexOf(curNode)
       prevNode.children.splice(index, 1)
       this.deleteNodeRecursive(curNode)
@@ -89,9 +85,17 @@ class Tree {
     this.deleteNodeRecursive(this.root)
   }
 
-  excludePaths (returnJSON = false) {
+  relativePaths (returnJSON = false) {
     let treeJSON = JSON.stringify(this, (key, value) => {
-      return key === 'path' ? undefined : value
+      if (key === 'nodePath') {
+        for (let child of this.root.children) {
+          let relativePath = path.relative(child.nodePath, value)
+          if (!relativePath.startsWith('..')){
+            return relativePath
+          }
+        }
+      }
+      return value
     })
     return returnJSON ? treeJSON : JSON.parse(treeJSON)
   }
