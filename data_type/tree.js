@@ -99,6 +99,14 @@ class Tree {
     })
     return returnJSON ? treeJSON : JSON.parse(treeJSON)
   }
+
+  baseDirPath (id) {
+    for (let child of this.root.children) {
+      if (child.id === id) {
+        return child.nodePath
+      }
+    }
+  }
 }
 
 Tree.NodeType = {
