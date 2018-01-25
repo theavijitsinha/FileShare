@@ -21,7 +21,7 @@ class Node {
 
 class FileNode extends Node {
   constructor (nodePath, nodeType, id) {
-    super (nodePath, nodeType, id)
+    super(nodePath, nodeType, id)
     this.size = fs.statSync(nodePath).size
   }
 }
@@ -52,9 +52,10 @@ class Tree {
       switch (nodeType) {
         case Tree.NodeType.BASE_DIR_NODE:
           curNode.children.push(new Node(nodePath, nodeType, id))
-          break;
+          break
         case Tree.NodeType.FILE_NODE:
           curNode.children.push(new FileNode(nodePath, nodeType, curNode.id))
+          break
         default:
           curNode.children.push(new Node(nodePath, nodeType, curNode.id))
       }
