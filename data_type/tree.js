@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs-extra')
 
 /**
  * Node of the tree, representing a single file/directory (except root node)
@@ -15,6 +16,13 @@ class Node {
     } else {
       this.name = path.basename(nodePath)
     }
+  }
+}
+
+class FileNode extends Node {
+  constructor (nodePath, nodeType, id) {
+    super (nodePath, nodeType, id)
+    this.size = fs.statSync(nodePath).size
   }
 }
 
@@ -41,10 +49,14 @@ class Tree {
       }
     } while (matchChild !== null)
     if (curNode.nodePath !== nodePath) {
-      if (nodeType === Tree.NodeType.BASE_DIR_NODE) {
-        curNode.children.push(new Node(nodePath, nodeType, id))
-      } else {
-        curNode.children.push(new Node(nodePath, nodeType, curNode.id))
+      switch (nodeType) {
+        case Tree.NodeType.BASE_DIR_NODE:
+          curNode.children.push(new Node(nodePath, nodeType, id))
+          break;
+        case Tree.NodeType.FILE_NODE:
+          curNode.children.push(new FileNode(nodePath, nodeType, curNode.id))
+        default:
+          curNode.children.push(new Node(nodePath, nodeType, curNode.id))
       }
     }
   }
