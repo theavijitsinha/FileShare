@@ -6,3 +6,5 @@
 *.html text eol=crlf
 *.json text eol=crlf
 .babelrc text eol=crlf
+.gitignore text eol=crlf
+.gitattributes text eol=crlf
