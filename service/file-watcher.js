@@ -57,8 +57,8 @@ module.exports.getPublicTree = function (returnJSON = false) {
   return fileTree.relativePaths(returnJSON)
 }
 
-module.exports.getAbsolutePath = function (fileNode) {
-  return path.join(fileTree.baseDirPath(fileNode.id), fileNode.nodePath)
+module.exports.getAbsolutePath = function (id, nodePath) {
+  return path.join(fileTree.baseDirPath(id), nodePath)
 }
 
 module.exports.fileTree = fileTree
