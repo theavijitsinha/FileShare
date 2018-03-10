@@ -24,8 +24,9 @@ class PeerConnection extends Connection {
   }
 
   messageHandler (message) {
-    console.log(`Client Received Message : ${message.data}`)
-    if (message.head === 'file_tree') {
+    console.log(`Client Received Message`)
+    console.log(message)
+    if (message.head === Message.Type.FILE_TREE) {
       this.fileTree = message.data
     }
   }
@@ -35,7 +36,7 @@ class PeerConnection extends Connection {
   }
 
   fetchFileTree () {
-    let message = new Message('get_file_tree')
+    let message = new Message(Message.Type.GET_FILE_TREE)
     this.sendMessage(message)
   }
 }

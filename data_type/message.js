@@ -33,4 +33,16 @@ class Message {
   }
 }
 
+Message.Type = {
+  'SERVER_INFO': 1,
+  'GET_FILE_TREE': 2,
+  'FILE_TREE': 3,
+  'START_FILE_RECEIVE': 4,
+  'START_FILE_SEND': 5,
+  'PACKET_SIZE_REQUEST': 6,
+  'PACKET_SIZE': 7,
+  'FILE_RECEIVE_REQUEST': 8,
+  'FILE_CHUNK': 9
+}
+
 module.exports = Message

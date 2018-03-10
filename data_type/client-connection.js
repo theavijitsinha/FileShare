@@ -20,19 +20,20 @@ class ClientConnection extends Connection {
   }
 
   messageHandler (message) {
-    console.log(`Message received from ${this.address.address}\n${message.data}`)
-    if (message.head === 'get_file_tree') {
+    console.log(`Message received from ${this.address.address}`)
+    console.log(message)
+    if (message.head === Message.Type.GET_FILE_TREE) {
       this.sendFileTree()
     }
   }
 
   sendFileTree () {
-    let message = new Message('file_tree', fileWatcher.getPublicTree())
+    let message = new Message(Message.Type.FILE_TREE, fileWatcher.getPublicTree())
     this.sendMessage(message)
   }
 
   sendServerInfo () {
-    let message = new Message('server_info', deviceInfo.getInfoObject())
+    let message = new Message(Message.Type.SERVER_INFO, deviceInfo.getInfoObject())
     this.sendMessage(message)
   }
 }
