@@ -5,7 +5,7 @@ const fileWatcher = require('./service/file-watcher.js')
 const fileServer = require('./service/file-server.js')
 const eventHandler = require('./service/event-handler.js')
 const peerDiscovery = require('./service/peer-discovery.js')
-const Constants = require('./service/constants.js')
+const Constant = require('./service/constant.js')
 
 require('./user_interface/react_compiled/main.react.js')
 
@@ -21,7 +21,7 @@ fse.pathExists(file)
     }
   })
 
-eventHandler.listen(Constants.Event.FILE_SERVER_STARTED, () => {
+eventHandler.listen(Constant.Event.FILE_SERVER_STARTED, () => {
   peerDiscovery.startDiscoverer()
 })
 

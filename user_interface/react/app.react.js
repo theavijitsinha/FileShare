@@ -2,7 +2,7 @@ const React = require('react')
 
 const fileWatcher = require('../../service/file-watcher.js')
 const eventHandler = require('../../service/event-handler.js')
-const Constants = require('../../service/constants.js')
+const Constant = require('../../service/constant.js')
 
 const FileTree = require('./file-tree.react.js')
 
@@ -15,11 +15,11 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    eventHandler.listen(Constants.Event.USER_FILES_CHANGED, this.setFileTree)
+    eventHandler.listen(Constant.Event.USER_FILES_CHANGED, this.setFileTree)
   }
 
   componentWillUnmount () {
-    eventHandler.unlisten(Constants.Event.USER_FILES_CHANGED, this.setFileTree)
+    eventHandler.unlisten(Constant.Event.USER_FILES_CHANGED, this.setFileTree)
   }
 
   render () {

@@ -3,7 +3,7 @@ module.exports = {}
 const Tree = require('../data_type/tree.js')
 
 const eventHandler = require('./event-handler.js')
-const Constants = require('./constants.js')
+const Constant = require('./constant.js')
 
 const chokidar = require('chokidar')
 const fse = require('fs-extra')
@@ -26,22 +26,22 @@ module.exports.startFileWatcher = function () {
   watcher = chokidar.watch(sharedPaths, {ignored: /(^|[/\\])\../})
     .on('addDir', function (path) {
       fileTree.addNode(path, Tree.NodeType.DIR_NODE)
-      eventHandler.emit(Constants.Event.USER_FILES_CHANGED)
+      eventHandler.emit(Constant.Event.USER_FILES_CHANGED)
     })
     .on('add', function (path) {
       fileTree.addNode(path, Tree.NodeType.FILE_NODE)
-      eventHandler.emit(Constants.Event.USER_FILES_CHANGED)
+      eventHandler.emit(Constant.Event.USER_FILES_CHANGED)
     })
     .on('unlinkDir', function (path) {
       fileTree.deleteNode(path)
-      eventHandler.emit(Constants.Event.USER_FILES_CHANGED)
+      eventHandler.emit(Constant.Event.USER_FILES_CHANGED)
     })
     .on('unlink', function (path) {
       fileTree.deleteNode(path)
-      eventHandler.emit(Constants.Event.USER_FILES_CHANGED)
+      eventHandler.emit(Constant.Event.USER_FILES_CHANGED)
     })
 
-  eventHandler.emit(Constants.Event.FILE_WATCHER_STARTED)
+  eventHandler.emit(Constant.Event.FILE_WATCHER_STARTED)
 }
 
 module.exports.stopFileWatcher = function () {
@@ -49,7 +49,7 @@ module.exports.stopFileWatcher = function () {
     fileTree.clearTree()
     watcher.close()
     watcher = null
-    eventHandler.emit(Constants.Event.FILE_WATCHER_STOPPED)
+    eventHandler.emit(Constant.Event.FILE_WATCHER_STOPPED)
   }
 }
 

@@ -1,11 +1,11 @@
-const Constants = require('../service/constants.js')
+const Constant = require('../service/constant.js')
 
 const Connection = require('./connection.js')
 const Message = require('./message.js')
 
 const net = require('net')
 
-let socketPort = Constants.FILE_SERVER_PORT
+let socketPort = Constant.FILE_SERVER_PORT
 
 class PeerConnection extends Connection {
   constructor (serverNode) {

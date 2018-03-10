@@ -5,13 +5,13 @@ module.exports = {}
 
 const NetworkInterface = require('../data_type/network-interface.js')
 
-const Constants = require('./constants.js')
+const Constant = require('./constant.js')
 
 const os = require('os')
 
 let interfaces = {}
 let discovererIntervalId = null
-let discovererInterval = Constants.INTERFACE_DISCOVERY_INTERVAL
+let discovererInterval = Constant.INTERFACE_DISCOVERY_INTERVAL
 
 module.exports.startDiscoverer = function () {
   discovererIntervalId = setInterval(() => {

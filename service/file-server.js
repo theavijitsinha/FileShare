@@ -4,14 +4,14 @@
 module.exports = {}
 
 const eventHandler = require('./event-handler.js')
-const Constants = require('./constants.js')
+const Constant = require('./constant.js')
 
 const ClientConnection = require('../data_type/client-connection.js')
 
 const net = require('net')
 
-let socketIP = Constants.FILE_SERVER_IP
-let socketPort = Constants.FILE_SERVER_PORT
+let socketIP = Constant.FILE_SERVER_IP
+let socketPort = Constant.FILE_SERVER_PORT
 
 let server = null
 let clientConnections = {}
@@ -27,7 +27,7 @@ module.exports.startFileServer = function () {
     const address = server.address()
     console.log(`File Server Listening ${address.address}:${address.port}`)
 
-    eventHandler.emit(Constants.Event.FILE_SERVER_STARTED)
+    eventHandler.emit(Constant.Event.FILE_SERVER_STARTED)
   })
   server.on('close', () => {
     console.log(`File Server Closed`)
