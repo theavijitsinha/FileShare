@@ -21,7 +21,7 @@ class Connection {
   }
 
   sendMessage (message) {
-    let messageString = message.getString() + '\n'
+    let messageString = message.string() + '\n'
     this.socket.write(messageString)
   }
 }
