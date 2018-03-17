@@ -1,4 +1,5 @@
 const Constant = require('../service/constant.js')
+const subprocess = require('../service/subprocess.js')
 
 const Connection = require('./connection.js')
 const Message = require('./message.js')
@@ -37,6 +38,24 @@ class PeerConnection extends Connection {
 
   fetchFileTree () {
     let message = new Message(Message.Type.GET_FILE_TREE)
+    this.sendMessage(message)
+  }
+
+  requestFileDownload (fileNode) {
+    subprocess.get(subprocess.Name.FILE_TRANSFER).send(
+      new Message(Message.Type.START_FILE_RECEIVE, {
+        'fileReceiveRequest': {
+          'id': fileNode.id,
+          'nodePath': fileNode.nodePath,
+          'size': fileNode.size
+        },
+        'address': this.serverNode.ip
+      }))
+    let message = new Message(Message.Type.PACKET_SIZE_REQUEST, {
+      'fileId': 0,
+      'id': fileNode.id,
+      'nodePath': fileNode.nodePath
+    })
     this.sendMessage(message)
   }
 }

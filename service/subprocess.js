@@ -29,4 +29,5 @@ module.exports.killAll = function () {
 }
 
 module.exports.Name = {
+  'FILE_TRANSFER': 'file-transfer'
 }

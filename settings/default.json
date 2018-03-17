@@ -1,5 +1,6 @@
 {
   "deviceName": null,
   "machineId": null,
-  "sharedPaths": []
+  "sharedPaths": [],
+  "defaultDownloadPath": null
 }

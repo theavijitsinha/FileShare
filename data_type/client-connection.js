@@ -3,6 +3,7 @@ const Message = require('./message.js')
 
 const fileWatcher = require('../service/file-watcher.js')
 const deviceInfo = require('../service/device-info.js')
+const subprocess = require('../service/subprocess.js')
 
 /**
  * Handle clients connected to the file server
@@ -24,6 +25,16 @@ class ClientConnection extends Connection {
     console.log(message)
     if (message.head === Message.Type.GET_FILE_TREE) {
       this.sendFileTree()
+    } else if (message.head === Message.Type.PACKET_SIZE_REQUEST) {
+      let absolutePath = fileWatcher.getAbsolutePath(message.data.id, message.data.nodePath)
+      subprocess.get(subprocess.Name.FILE_TRANSFER).send(
+        new Message(Message.Type.START_FILE_SEND, {
+          'fileSendRequest': {
+            'fileId': message.data.fileId,
+            'absolutePath': absolutePath
+          },
+          'address': this.address.address
+        }))
     }
   }
 
