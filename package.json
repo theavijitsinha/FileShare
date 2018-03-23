@@ -16,10 +16,10 @@
   "author": "Avijit Sinha",
   "license": "CC0-1.0",
   "dependencies": {
-    "chokidar": "^2.0.2",
+    "chokidar": "^2.0.3",
     "fs-extra": "^5.0.0",
     "nanodiscover": "^1.0.2",
-    "node-machine-id": "^1.1.9",
+    "node-machine-id": "^1.1.10",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
@@ -28,7 +28,7 @@
     "babel-preset-react": "^6.24.1",
     "electron": "^1.8.4",
     "gulp": "^3.9.1",
-    "gulp-babel": "^8.0.0-beta.2",
+    "gulp-babel": "^7.0.1",
     "gulp-watch": "^5.0.0"
   }
 }
