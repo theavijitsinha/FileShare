@@ -1,21 +1,16 @@
-const path = require('path')
 const nmi = require('node-machine-id')
-const fse = require('fs-extra')
+
+const Settings = require('./settings.js')
 
 module.exports = {}
 
 module.exports.getInfoObject = function () {
-  let settingsFile = path.join(__dirname, '../settings/user.json')
-  let settings = fse.readJsonSync(settingsFile)
-  let obj = {
-    deviceName: settings.deviceName,
-    machineId: settings.machineId
-  }
-  if (!settings.machineId) {
+  if (Settings.machineId() === '') {
     let machineId = nmi.machineIdSync()
-    settings.machineId = machineId
-    fse.writeJson(settingsFile, settings, {spaces: 2})
-    obj.machineId = machineId
+    Settings.machineId(machineId)
   }
-  return obj
+  return {
+    deviceName: Settings.deviceName,
+    machineId: Settings.machineId
+  }
 }

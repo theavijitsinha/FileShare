@@ -4,6 +4,7 @@ const Tree = require('../data_type/tree.js')
 
 const eventHandler = require('./event-handler.js')
 const Constant = require('./constant.js')
+const Settings = require('./settings.js')
 
 const chokidar = require('chokidar')
 const fse = require('fs-extra')
@@ -14,16 +15,16 @@ let fileTree = new Tree()
 
 module.exports.startFileWatcher = function () {
   fileTree.clearTree()
-  let sharedPathsArray = fse.readJsonSync(path.join(__dirname, '../settings/user.json')).sharedPaths
-  let sharedPaths = []
-  for (let sharedPathObj of sharedPathsArray) {
+  let sharedPaths = Settings.sharedPaths()
+  let sharedPathsArray = []
+  for (let sharedPathObj of sharedPaths) {
     if (fse.pathExistsSync(sharedPathObj.path)) {
-      sharedPaths.push(sharedPathObj.path)
+      sharedPathsArray.push(sharedPathObj.path)
       fileTree.addNode(sharedPathObj.path, Tree.NodeType.BASE_DIR_NODE, sharedPathObj.id)
     }
   }
 
-  watcher = chokidar.watch(sharedPaths, {ignored: /(^|[/\\])\../})
+  watcher = chokidar.watch(sharedPathsArray, {ignored: /(^|[/\\])\../})
     .on('addDir', function (path) {
       fileTree.addNode(path, Tree.NodeType.DIR_NODE)
       eventHandler.emit(Constant.Event.USER_FILES_CHANGED)

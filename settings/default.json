@@ -1,6 +1,6 @@
 {
-  "deviceName": null,
-  "machineId": null,
+  "deviceName": "",
+  "machineId": "",
   "sharedPaths": [],
-  "defaultDownloadPath": null
+  "defaultDownloadPath": ""
 }
