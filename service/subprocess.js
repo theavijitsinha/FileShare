@@ -1,11 +1,12 @@
 const cp = require('child_process')
+const path = require('path')
+
+const Constant = require('./constant.js')
 
 let subprocessList = []
 
 module.exports.startSubprocess = function (modulePath, name) {
-  // TODO: The path needs to be fixed. Child process module may not always be in
-  // the service directory. Also, hard coded path looks extremely ugly.
-  let subprocess = cp.fork('./resources/app/service/' + modulePath, {
+  let subprocess = cp.fork(path.resolve(Constant.APP_DIRECTORY, modulePath), {
     'stdio': ['pipe', 'pipe', 'pipe', 'ipc']
   })
   subprocessList[name] = subprocess

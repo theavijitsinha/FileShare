@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {}
 
 module.exports.Event = {
@@ -14,6 +16,8 @@ module.exports.Event = {
 
   USER_FILES_CHANGED: 'user_files_changed'
 }
+
+module.exports.APP_DIRECTORY = path.resolve(__dirname, '..')
 
 module.exports.FILE_SERVER_IP = '0.0.0.0'
 module.exports.FILE_SERVER_PORT = 8000

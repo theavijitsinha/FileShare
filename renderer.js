@@ -13,7 +13,7 @@ eventHandler.listen(Constant.Event.FILE_SERVER_STARTED, () => {
 
 fileWatcher.startFileWatcher()
 
-subprocess.startSubprocess('file-transfer.js', subprocess.Name.FILE_TRANSFER)
+subprocess.startSubprocess('service/file-transfer.js', subprocess.Name.FILE_TRANSFER)
 
 fileServer.startFileServer()
 
